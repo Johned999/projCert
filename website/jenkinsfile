@@ -1,29 +1,39 @@
-# Use the official PHP base image
-FROM php:7.4-apache
+pipeline {
+    agent any
 
-# Set the working directory in the container
-WORKDIR /var/www/html
+    stages {
+        stage('checkout') {
+            steps {
+                echo 'checkout from repo using git clone'
+                git 'https://github.com/Johned999/projCert.git'
+            }
+        }
+      
+        stage('docker build') {
+            steps {
+                echo 'docker build'
+                sh 'docker build -t johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER} .'
+            }
+        }
+        stage('docker log-in') {
+            steps {
+                echo 'docker log-in'
+                sh 'docker login -u johned999 -p Nathan999'
+            }
+        }
 
-# Copy all files from the root point to the container
-# COPY . /var/www/
-# Copy only PHP files to the container
-COPY *.php /var/www/
+        stage('docker push') {
+            steps {
+                echo 'docker push'
+                sh 'docker push johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER}'
+            }
+        }
 
-# Copy the "content" directory to the container
-COPY content /var/www/html/content
-# Copy the "template" directory to the container
-COPY content /var/www/html/template
-
-# Install any dependencies required by your PHP application
-RUN apt-get update \
-    && apt-get install -y \
-       libpng-dev \
-       libjpeg-dev \
-    && docker-php-ext-configure gd --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd
-
-# Expose the container port
-EXPOSE 80
-
-# Start the Apache web server
-CMD ["apache2-foreground"]
+        stage('remove image from jenkins') {
+            steps {
+                echo 'remove image'
+                //sh 'docker push johned999/addressbook:${JOB_NAME}-${BUILD_NUMBER}'
+            }
+        }
+    }
+}
