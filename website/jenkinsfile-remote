@@ -13,7 +13,7 @@ pipeline {
         stage('Debug') {
             steps {
                 //  list the contents of the following locations
-                sh 'ls -al /var/lib/jenkins/workspace/16th_apr_Assign_proj-cert' // List contents of the repository directory
+                sh 'ls -al /var/lib/jenkins/workspace/16th_apr_Assign_proj-cert/website/' // List contents of the repository directory
                 sh 'ls -al /var/lib/jenkins/workspace/16th_apr_Assign_proj-cert/ansible' // List contents of the ansible directory
             }
         }
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 //  Copy the ssh cert to the build server
                 echo 'Copying certificate to build server'
-                sh 'ansible-playbook -i inventory copy_ssh_key.yaml'
+                sh 'ansible-playbook -i inventory /var/lib/jenkins/workspace/16th_apr_Assign_proj-cert/website/copy_ssh_key.yaml'
             }
         }
 
