@@ -20,7 +20,7 @@ pipeline {
                         def remoteDir = 'projCert/website/'
 
                         // Run the Docker build command remotely
-                        sshCommand remoteUser: remoteUser, remoteHost: remoteHost, command: "cd ${remoteDir} && docker build -t your-image-name ."
+                        sshCommand remoteUser: remoteUser, remoteHost: remoteHost, command: "cd ${remoteDir} && docker build -t johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER} ."
                     }
                 }
             }
