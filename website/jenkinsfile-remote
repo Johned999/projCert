@@ -10,6 +10,14 @@ pipeline {
             }
         }
 
+        stage('Copy Certificate') {
+            steps {
+                //  Copy the ssh cert to the build server
+                echo 'Copying certificate to build server'
+                sh 'ansible-playbook -i inventory copy_ssh_key.yaml'
+            }
+        }
+
         stage('Build Docker Image Remotely') {
             steps {
                 sshagent(['001']) {
@@ -17,7 +25,7 @@ pipeline {
                     script {
                         def remoteHost = '35.179.94.244'
                         def remoteUser = 'John-Davies-DevOpsTraining'
-                        def remoteDir = 'projCert/website/'
+                        def remoteDir = '/projCert/website/'
 
                         // Run the Docker build command remotely
                         sshCommand remoteUser: remoteUser, remoteHost: remoteHost, command: "cd ${remoteDir} && docker build -t johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER} ."

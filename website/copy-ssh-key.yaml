@@ -1,0 +1,8 @@
+---
+- hosts: build-servers
+  tasks:
+    - name: Copy SSH key
+      authorized_key:
+        user: John-Davies-DevOpsTraining
+        state: present
+        key: "{{ lookup('file', '/var/lib/jenkins/workspace/16th_apr_Assign_proj-cert@tmp/private_key_6482590322023005383.key') }}"
