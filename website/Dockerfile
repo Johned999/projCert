@@ -10,9 +10,9 @@ WORKDIR /var/www/html
 COPY *.php /var/www/
 
 # Copy the "content" directory to the container
-COPY content /var/www/html/content
+COPY content /var/www/content
 # Copy the "template" directory to the container
-COPY content /var/www/html/template
+COPY template /var/www/template
 
 # Install any dependencies required by your PHP application
 RUN apt-get update \
