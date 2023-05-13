@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
+                //  Clone repository from GitHub
                 echo 'checkout from repo using git clone'
                 git 'https://github.com/Johned999/projCert.git'
             }
@@ -11,12 +12,17 @@ pipeline {
       
         stage('docker build') {
             steps {
-                dir(projCert/website/) echo 'docker build'
+                //  Change Dir
+                echo 'docker build'
+                dir('projCert/website/') {
+                //   After changing directory run docker build
                 sh 'docker build -t johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER} .'
+                }
             }
         }
         stage('docker log-in') {
             steps {
+                //  Log-in to DockerHub
                 echo 'docker log-in'
                 sh 'docker login -u johned999 -p Nathan999'
             }
@@ -24,6 +30,7 @@ pipeline {
 
         stage('docker push') {
             steps {
+                //  Push image to repository
                 echo 'docker push'
                 sh 'docker push johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER}'
             }
@@ -31,6 +38,7 @@ pipeline {
 
         stage('Run Docker container') {
             steps {
+                // Run image and test operation
                 echo 'Run php App container image'
                 sh 'docker run -d  johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER}'
             }
