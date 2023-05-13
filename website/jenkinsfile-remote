@@ -14,7 +14,7 @@ pipeline {
             steps {
                 //  list the contents of the following locations
                 sh 'ls -al /var/lib/jenkins/workspace/16th_apr_Assign_proj-cert/website/' // List contents of the repository directory
-                sh 'ls -al /var/lib/jenkins/workspace/16th_apr_Assign_proj-cert/ansible' // List contents of the ansible directory
+                sh 'ls -al /var/lib/jenkins/workspace/16th_apr_Assign_proj-cert/' // List contents of the ansible directory
             }
         }
 
