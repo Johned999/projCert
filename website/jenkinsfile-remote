@@ -29,7 +29,7 @@ pipeline {
 
         stage('Build Docker Image Remotely') {
             steps {
-                sshagent(['001']) {
+                sshagent([001]) {
                     // Connect to the remote EC2 server
                     script {
                         def remoteHost = '35.179.94.244'
@@ -64,7 +64,7 @@ pipeline {
             steps {
                 //  Push image to repository
                 echo 'docker push'
-                sh 'docker push johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER}'
+                sh "docker push johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER}"
             }
         }
 
@@ -72,7 +72,7 @@ pipeline {
             steps {
                 // Run image and test operation
                 echo 'Run php App container image'
-                sh 'docker run -d  johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER}'
+                sh "docker run -d  johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER}"
             }
         }
     }
