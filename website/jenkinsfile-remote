@@ -22,7 +22,8 @@ pipeline {
             steps {
                 //  Copy the ssh cert to the build server
                 echo 'Copying certificate to build server'
-                sh 'ansible-playbook -i inventory /var/lib/jenkins/workspace/16th_apr_Assign_proj-cert/website/copy_ssh_key.yaml'
+                //sh 'ansible-playbook -i inventory /var/lib/jenkins/workspace/16th_apr_Assign_proj-cert/website/copy_ssh_key.yaml'
+                sh 'ansible-playbook -i inventory website/copy_ssh_key.yaml'
             }
         }
 
