@@ -15,7 +15,7 @@ pipeline {
                 sshagent(['001']) {
                     // Connect to the remote EC2 server
                     script {
-                        def remoteHost = '13.40.177.169'
+                        def remoteHost = '35.179.94.244'
                         def remoteUser = 'John-Davies-DevOpsTraining'
                         def remoteDir = 'projCert/website/'
 
