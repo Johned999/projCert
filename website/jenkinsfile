@@ -11,7 +11,7 @@ pipeline {
       
         stage('docker build') {
             steps {
-                echo 'docker build'
+                dir(projCert/website/) echo 'docker build'
                 sh 'docker build -t johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER} .'
             }
         }
@@ -29,10 +29,10 @@ pipeline {
             }
         }
 
-        stage('remove image from jenkins') {
+        stage('Run Docker container') {
             steps {
-                echo 'remove image'
-                //sh 'docker push johned999/addressbook:${JOB_NAME}-${BUILD_NUMBER}'
+                echo 'Run php App container image'
+                sh 'docker run -d  johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER}'
             }
         }
     }
