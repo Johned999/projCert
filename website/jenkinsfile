@@ -16,6 +16,8 @@ pipeline {
                 echo 'docker build'
                 dir('projCert/website/') {
                 //   After changing directory run docker build
+                sh 'PWD'
+                sh 'ls'
                 sh 'docker build -t johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER} .'
                 }
             }
