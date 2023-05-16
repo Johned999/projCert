@@ -18,7 +18,8 @@ pipeline {
                 //   After changing directory run docker build
                 PWD
                 ls               
-                docker build -t johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER} .
+                //docker build -t johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER} .
+                docker build -t johned999/proj-cert:v6 .
                 }
             }
         }
