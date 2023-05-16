@@ -16,7 +16,8 @@ pipeline {
                 echo 'docker build'
                 dir('projCert/website/') {
                 //   After changing directory run docker build
-                sh 'ls -al /var/lib/jenkins/workspace/16th_apr_Assign_proj-cert/' // List contents of the ansible directory               
+                sh 'ls -al /var/lib/jenkins/workspace/16th_apr_Assign_proj_cert/' // List contents of the ansible directory
+               
                 //docker build -t johned999/proj-cert:${JOB_NAME}-${BUILD_NUMBER} .
                 //docker build -t johned999/proj-cert:v6 .
                 }
